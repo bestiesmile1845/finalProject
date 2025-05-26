@@ -67,13 +67,9 @@ async function UpdateMember(id: number | undefined, data: MembersInterface) {
         Lastname: data.Lastname,
         Email: data.Email,
         Username: data.Username,
-        Phonenumber: data.Phonenumber || "", // Assuming this field exists in data
         GenderID: data.GenderID,
-        Password: "", // Keep Password empty for security reasons
-        TypeMember: data.TypeMember || "", // Assuming this field exists in data
-        PaymentStatus: data.PaymentStatus || "", // Assuming this field exists in data
-        SuspensionStatus: data.SuspensionStatus || "", // Assuming this field exists in data
-        // Password is usually not included in updates for security reasons
+        Password: data.Password, 
+        PhoneNumber: data.PhoneNumber,
     };
   
     const requestOptions = {

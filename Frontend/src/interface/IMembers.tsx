@@ -4,11 +4,8 @@ export interface MembersInterface {
     Lastname?: string;
     Email?: string;
     Username?: string;
-    Phonenumber?: string;
     GenderID?: number;
     Password?: string;
-    Age?: string;
-    TypeMember?: string;
-	PaymentStatus?: string;
-	SuspensionStatus?: string;
+    Age?: number;
+    PhoneNumber?:string;
   }

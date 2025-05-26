@@ -3,91 +3,79 @@ package config
 import (
 	"fmt"
 
-	"time"
-
 	"bestiesmile1845/finalProject.git/entity"
 
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
 
-
 var db *gorm.DB
-
 
 func DB() *gorm.DB {
 
-   return db
+	return db
 
 }
-
 
 func ConnectionDB() {
 
-   database, err := gorm.Open(sqlite.Open("sa.db?cache=shared"), &gorm.Config{})
+	database, err := gorm.Open(sqlite.Open("sa.db?cache=shared"), &gorm.Config{})
 
-   if err != nil {
+	if err != nil {
 
-       panic("failed to connect database")
+		panic("failed to connect database")
 
-   }
+	}
 
-   fmt.Println("connected database")
+	fmt.Println("connected database")
 
-   db = database
+	db = database
 
 }
 
-
 func SetupDatabase() {
 
+	db.AutoMigrate(
 
-   db.AutoMigrate(
+		&entity.Users{},
+		&entity.Admin{},
+		&entity.Genders{},
+	)
 
-       &entity.Users{},
+	GenderMale := entity.Genders{Gender: "Male"}
 
-       &entity.Genders{},
+	GenderFemale := entity.Genders{Gender: "Female"}
 
-   )
+	db.FirstOrCreate(&GenderMale, &entity.Genders{Gender: "Male"})
 
+	db.FirstOrCreate(&GenderFemale, &entity.Genders{Gender: "Female"})
 
-   GenderMale := entity.Genders{Gender: "Male"}
+	hashedPassword, _ := HashPassword("123456")
 
-   GenderFemale := entity.Genders{Gender: "Female"}
+	User := &entity.Users{
+		Username:    "smile",
+		Password:    hashedPassword,
+		Email:       "smile@gmail.com",
+		Firstname:   "Thawamhathai",
+		Lastname:    "Bandasak",
+		PhoneNumber: "0655765586",
+		Age:         15,
+		GenderID:    2,
+	}
+	hashedPasswordAd, _ := HashPassword("admin")
+	Admin := entity.Admin{
+		Username:  "Admin",
+		Password:  hashedPasswordAd,
+		Email:     "Admin@gmail.com",
+		Firstname: "Thawan",
+		Lastname:  "Banda",
+		GenderID:  2,
+	}
 
+	db.FirstOrCreate(User, &entity.Users{
 
-   db.FirstOrCreate(&GenderMale, &entity.Genders{Gender: "Male"})
-
-   db.FirstOrCreate(&GenderFemale, &entity.Genders{Gender: "Female"})
-
-
-   hashedPassword, _ := HashPassword("123456")
-
-   BirthDay, _ := time.Parse("2006-01-02", "1988-11-12")
-
-   User := &entity.Users{
-        UserName: "Bestiesmile",
-       FirstName: "Thawanhathai",
-
-       LastName:  "Bandasak",
-
-       Email:     "Thawanhathai.work@gmail.com",
-
-       Age:       23,
-
-       Password:  hashedPassword,
-
-       BirthDay:  BirthDay,
-
-       GenderID:  1,
-
-   }
-
-   db.FirstOrCreate(User, &entity.Users{
-
-       Email: "sa@gmail.com",
-
-   })
-
+		Email: "sa@gmail.com",
+	})
+	db.FirstOrCreate(&Admin, entity.Admin{Email: "PsAdmin@gmail.com"})
 
 }

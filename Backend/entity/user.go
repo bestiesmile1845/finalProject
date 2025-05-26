@@ -1,33 +1,19 @@
 package entity
 
-
 import (
-
-   "time"
-
-   "gorm.io/gorm"
-
+	"gorm.io/gorm"
 )
 
 type Users struct {
+	gorm.Model
 
-   gorm.Model
-   UserName string `json: "user_name"`
-
-   FirstName string    `json:"first_name"`
-
-   LastName  string    `json:"last_name"`
-
-   Email     string    `json:"email"`
-
-   Age       uint8     `json:"age"`
-
-   Password  string    `json:"-"`
-
-   BirthDay  time.Time `json:"birthday"`
-
-   GenderID  uint      `json:"gender_id"`
-
-   Gender    *Genders  `gorm:"foreignKey: gender_id" json:"gender"`
-
+	Firstname   string
+	Lastname    string
+	Email       string
+	Password    string
+	Username    string
+	GenderID    uint
+	Age         int
+	PhoneNumber string
+	Gender      Genders `gorm:"foreignKey:GenderID"`
 }

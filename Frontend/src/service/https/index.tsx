@@ -51,34 +51,5 @@ async function CountMembers() {
     return await fetchData(`${apiUrl}/members/count`, requestOptions);
 }
 
-async function CountClasses() {
-    const requestOptions = {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-        },
-    };
 
-    return await fetchData(`${apiUrl}/classes/count`, requestOptions);
-}
-
-async function CountStaffs() {
-    const requestOptions = {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-        },
-    };
-
-    return await fetchData(`${apiUrl}/staffs/count`, requestOptions);
-}
-async function CountPackages() {
-    const requestOptions = {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-        },
-    };
-    return await fetchData(`${apiUrl}/packages/count`, requestOptions);
-}
-export { SignIn, CountMembers, CountClasses, CountStaffs ,CountPackages};
+export { SignIn, CountMembers};

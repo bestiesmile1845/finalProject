@@ -1,10 +1,31 @@
+/* ฟอนต์ละมุนจาก Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mali:wght@300;400;600;700&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Anuphan:wght@100..700&family=Signika:wght@300..700&display=swap');
-
+/* ฟอนต์หลักของแอป */
 body {
-    font-family: "Signika", sans-serif;
-    font-family: "Anuphan", sans-serif;
+    font-family: 'Kanit', 'Inter', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    background-color: #fff;
+    color: #333;
 }
+
+/* Optional: คลาสสำหรับเปลี่ยนฟอนต์เฉพาะจุด */
+.font-kanit {
+    font-family: 'Kanit', sans-serif;
+}
+
+.font-inter {
+    font-family: 'Inter', sans-serif;
+}
+
+.font-mali {
+    font-family: 'Mali', cursive;
+}
+
+/* marquee animation */
 @keyframes marquee {
     0% {
         transform: translateX(100%);
@@ -13,10 +34,3 @@ body {
         transform: translateX(-100%);
     }
 }
-
-.animate-marquee {
-    display: inline-block;
-    white-space: nowrap;
-    animation: marquee 30s linear infinite;
-}
-
